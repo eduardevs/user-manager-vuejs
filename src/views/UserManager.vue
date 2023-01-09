@@ -63,10 +63,10 @@
               <div class="col-sm-1 d-flex flex-column justify-content-center align-items-center">
                 <router-link :to="`/users/view/${user.id}`" class="btn btn-warning my-1">
                   <i class="fa fa-eye"></i>                </router-link>
-                  <router-link to="/users/edit/:userId" class="btn btn-primary my-1">
+                  <router-link :to="`/users/edit/${user.id}`" class="btn btn-primary my-1">
                   <i class="fa fa-pen"></i> 
                 </router-link>
-                <button class="btn btn-danger my-1">
+                <button class="btn btn-danger my-1" @click="deleteUser(user.id)">
                   <i class="fa fa-trash"></i> 
                 </button>
               </div>
@@ -109,6 +109,21 @@ export default {
     methods: {
     // getAllUsersData: async function() {
     //   return await UserService.getAllUsers();
+      deleteUser : async function (userId) {
+        try {
+          this.loading = true;
+          let response = await UserService.deleteUser(userId);
+          if(response) {
+            let response = await UserService.getAllUsers();
+            this.users = response.data;
+            this.loading = false;
+          } 
+        }
+        catch(error) {
+          this.errorMessage = error;
+            this.loading = false;
+        }
+      }
     }
     // }
     ,

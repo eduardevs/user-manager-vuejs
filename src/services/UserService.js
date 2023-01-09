@@ -29,7 +29,8 @@ export class UserService {
     }
 
     static updateUser(user, userId) {
-        let dataURL = `${this.serverURL}/users/${userId}`
+        let dataURL = `https://jsonplaceholder.typicode.com/posts/${userId}`
+        
         return axios.put(dataURL, user)
     }
 
