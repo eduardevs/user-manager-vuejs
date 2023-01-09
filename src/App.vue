@@ -1,15 +1,17 @@
+
 <template>
+  <Spinner />
   <NavBar />
   <router-view />
 </template>
-
 <script>
 import NavBar from './components/NavBar.vue';
+import Spinner from './components/Spinner.vue';
+
 export default {
-  props: {
-  },
+  
   name: 'App',
-  components: { NavBar }
+  components: { NavBar, Spinner }
 }
 </script>
 

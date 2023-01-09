@@ -23,11 +23,11 @@
       </div>
     </div>
   
-  
-  <div class="container mt-3">
+
+  <div class="container mt-3" v-if="users.length > 0">
     <div class="row">
       <div class="col-md-6">
-        <div class="card my-2 list-group item-success">
+        <div class="card my-2 list-group-item-success shadow-lg" v-for="user of users" :key="user">
           <div class="card-body">
             <div class="row align-items-center">
               <div class="col-sm-4">
@@ -60,8 +60,36 @@
 </template>
 
 <script>
+import { UserService } from '@/services/UserService';
+
 export default {
   name: "UserManager",
+  data: function () {
+    return {
+      loading: false,
+      users: [],
+      errorMessage: null
+    }
+  },
+  created: async function () {
+    try {
+      this.loading = true;
+      let response = await UserService.getAllUsers();
+      this.users = response.data;
+      this.loading = false;
+    }
+    catch (error) {
+      this.errorMessage = error;
+      this.loading = false;
+    }
+  },
+  // here not necesary method but used for learning purpose
+  methods: {
+    // getAllUsersData: async function() {
+    //   return await UserService.getAllUsers();
+
+    }
+  // }
 };
 </script>
 
