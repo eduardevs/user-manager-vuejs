@@ -1,14 +1,15 @@
 <template>
   <div class="container mt-3">
+    <AddUser v-on:handledata="handleUser" />
     <div class="row">
       <div class="col">
-          <p class="text-success fw-bold">
+          <!-- <p class="text-success fw-bold">
             User Manager
             <router-link to="/users/add" class="btn btn-success btn-sm"
               ><i class="fa fa-plus-circle"></i> New</router-link
             >
-          </p>
-          <form>
+          </p> -->
+          <!-- <form>
             <div class="row">
             <div class="col-md-6">
               <input type="text" class="form-control" placeholder="Search Name" />
@@ -17,7 +18,7 @@
               <input type="submit" class="btn btn-outline-dark" value="Search" />
             </div>
             </div>
-          </form>
+          </form> -->
         </div>
       
       </div>
@@ -76,18 +77,21 @@
       </div>
     </div>
   </div>
+
+  <pre>{{ newUsersArr }}</pre>
+
 </template>
 
 <script>
 import Spinner from '@/components/Spinner.vue';
 import { UserService } from '@/services/UserService';
-
+import AddUser from './AddUser.vue';
 export default {
-  props: {
-  },
+
     name: "UserManager",
     data: function () {
         return {
+            newUsersArr: [],
             loading: false,
             users: [],
             errorMessage: null
@@ -126,11 +130,26 @@ export default {
         //   this.errorMessage = error;
         //     this.loading = false;
         // }
+      },
+      handleUser(user) {
+
+        user.id = Math.floor(Math.random() * 1000);
+
+        if(user) {
+          let existingVal = this.users.find(item=>item.username === user.username)
+
+          console.log(existingVal)
+          this.users.push(user);
+        
+          user = "";
+          
+          
+
+          // console.log(this.newUsersArr)
+        }
       }
-    }
-    // }
-    ,
-    components: { Spinner }
+    },
+    components: { Spinner, AddUser }
 };
 </script>
 

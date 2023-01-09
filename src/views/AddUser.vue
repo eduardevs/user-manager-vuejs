@@ -18,7 +18,8 @@
     <div class="container mt-3">
     <div class="row">
       <div class="col-md-3">
-        <form @submit.prevent="submitCreate()">
+        
+        <form @submit.prevent="inputdata()">
           <div class="mb-2">
             <input v-model="user.name" type="text" class="form-control" placeholder="Name">
           </div>
@@ -52,30 +53,33 @@
              <!--{ name, catchPhrase, bs } -->
           </div>
           <div class="mb-2">
-            <input type="submit" class="btn btn-submit btn-success" value="Create" />
-             <!--{ name, catchPhrase, bs } -->
+            <button @click="inputdata" type="submit" class="btn btn-submit btn-success" value="Create" >Add User</button>
           </div>
         </form>
       </div>
     </div>
-    <div class="row mt-3">
+    <!-- <div class="row mt-3">
       <div class="col">
         <router-link to="/" class="btn btn-success"><i class="fa fa-arrow-alt-circle-left"></i> Back</router-link>
       </div>
-    </div>
+    </div> -->
   </div>
+  
 </template>
 
 <script>
 // import { UserService } from '@/services/UserService';
-import axios from "axios"
+// import axios from "axios"
 export default {
+  
+
   name: 'AddUser',
   data : function() {
     return {
       errorMessage: "",
       message: "",
       user : {
+        id : '',
         name : '',
         username : '',
         website : '',
@@ -99,23 +103,31 @@ export default {
       },
     }
   },
+  emits: ['handledata'],
+  created() {
+    this.$emit('handledata', this.user)
+  },
   methods : {
     submitCreate : async function () {
-      
-      axios
-        .post('https://jsonplaceholder.typicode.com/posts', {
-            body: JSON.stringify(this.user),
-        })
-        .then(response => {
-            console.log(response)
     
-            if(response.status === 201) {
-              this.message = "The user was created succesfully ! ";
-            } else {
-              this.errorMessage = "Oops! The user was not created"
-            }
-        })
-        .catch(err => console.error(err));
+      // axios
+      //   .post('https://jsonplaceholder.typicode.com/posts', {
+      //       body: JSON.stringify(this.user),
+      //   })
+      //   .then(response => {
+      //       console.log(response)
+    
+      //       if(response.status === 201) {
+      //         this.message = "The user was created succesfully ! ";
+      //       } else {
+      //         this.errorMessage = "Oops! The user was not created"
+      //       }
+      //   })
+      //   .catch(err => console.error(err));
+    },
+    inputdata () {
+      this.$emit("handledata", this.user )
+
     }
   }
 }
