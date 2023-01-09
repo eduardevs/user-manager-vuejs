@@ -2,6 +2,7 @@ import axios from "axios"
 
 export class UserService {
     static serverURL = `https://jsonplaceholder.typicode.com/users`;
+   
 
     static getAllUsers() {
         let dataURL = `${this.serverURL}/`
@@ -14,8 +15,19 @@ export class UserService {
     }
 
     static createUser(user) {
-        let dataURL = `${this.serverURL}/users/`
-        return axios.post(dataURL, user)
+        let dataURL = `https://jsonplaceholder.typicode.com/posts/`
+        
+
+        axios
+        .post(dataURL, {
+            body: user,
+        })
+        .then(response => {
+            // console.log(response)
+            return "Status " + response.status + " Post created";
+            
+        })
+        .catch(err => console.error(err));
     }
 
     static updateUser(user, userId) {
