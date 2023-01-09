@@ -10,14 +10,12 @@ export class UserService {
     }
 
     static getUser(userId) {
-        let dataURL = `${this.serverURL}/users/${userId}`
+        let dataURL = `${this.serverURL}/${userId}`
         return axios.get(dataURL)
     }
 
     static createUser(user) {
         let dataURL = `https://jsonplaceholder.typicode.com/posts/`
-        
-
         axios
         .post(dataURL, {
             body: user,

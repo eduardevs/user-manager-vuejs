@@ -61,7 +61,7 @@
 
               </div>
               <div class="col-sm-1 d-flex flex-column justify-content-center align-items-center">
-                <router-link to="/users/view/:userId" class="btn btn-warning my-1">
+                <router-link :to="`/users/view/${user.id}`" class="btn btn-warning my-1">
                   <i class="fa fa-eye"></i>                </router-link>
                   <router-link to="/users/edit/:userId" class="btn btn-primary my-1">
                   <i class="fa fa-pen"></i> 
