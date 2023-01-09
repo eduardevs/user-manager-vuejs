@@ -110,19 +110,22 @@ export default {
     // getAllUsersData: async function() {
     //   return await UserService.getAllUsers();
       deleteUser : async function (userId) {
-        try {
-          this.loading = true;
-          let response = await UserService.deleteUser(userId);
-          if(response) {
-            let response = await UserService.getAllUsers();
-            this.users = response.data;
-            this.loading = false;
-          } 
-        }
-        catch(error) {
-          this.errorMessage = error;
-            this.loading = false;
-        }
+
+        this.users = this.users.filter((obj) => obj.id !== userId)
+
+        // try {
+        //   this.loading = true;
+        //   let response = await UserService.deleteUser(userId);
+        //   if(response) {
+        //     let response = await UserService.getAllUsers();
+        //     this.users = response.data;
+        //     this.loading = false;
+        //   } 
+        // }
+        // catch(error) {
+        //   this.errorMessage = error;
+        //     this.loading = false;
+        // }
       }
     }
     // }
@@ -132,3 +135,4 @@ export default {
 </script>
 
 <style scoped></style>
+
