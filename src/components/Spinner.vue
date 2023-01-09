@@ -1,11 +1,13 @@
 <template>
-    <h2>Edit Contact</h2>
+    <h2>Spinner</h2>
 </template>
 
 <script>
 export default {
-  name: 'EditContact',
- 
+    methods: {
+    },
+    name: 'Spinner',
+
 }
 </script>
 

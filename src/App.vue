@@ -1,12 +1,15 @@
 <template>
-<h2>Ap component</h2>
-  <!-- <router-view/> -->
-  <i class="fa fa-home fa-4 text-danger"/>
+  <NavBar />
+  <router-view />
 </template>
 
 <script>
+import NavBar from './components/NavBar.vue';
 export default {
-  name: 'App'
+  props: {
+  },
+  name: 'App',
+  components: { NavBar }
 }
 </script>
 
