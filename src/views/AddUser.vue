@@ -11,6 +11,10 @@
 <div class="alert alert-success ml-3" v-if="message">
       {{ message }}
   </div>
+  <div class="alert alert-danger ml-3" v-else-if="error">
+    {{ error }}
+  </div>
+
     <div class="container mt-3">
     <div class="row">
       <div class="col-md-3">
@@ -69,7 +73,7 @@ export default {
   name: 'AddUser',
   data : function() {
     return {
-      res: "",
+      error: "",
       message: "",
       user : {
         name : '',
@@ -100,7 +104,6 @@ export default {
       
       axios
         .post('https://jsonplaceholder.typicode.com/posts', {
-           
             body: this.user,
         })
         .then(response => {
@@ -109,7 +112,7 @@ export default {
             if(response.status === 201) {
               this.message = "The user was created succesfully ! ";
             } else {
-              this.message = "Oops! The user was not created"
+              this.error = "Oops! The user was not created"
             }
         })
         .catch(err => console.error(err));
